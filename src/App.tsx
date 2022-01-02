@@ -1,14 +1,16 @@
+
 import { useState } from 'react'
 import {useAppDispatch,useAppSelector} from './app/hooks';
 import {incremented,decrement,reset,amountAdded} from './features/counter/counterSlice'
 import {useFetchRoutesQuery} from './features/popularRoutes/popularRoutes';
-import {useFetchCheapestRoutesQuery} from './features/popularRoutes/popularRoutes';
 import * as ReactBootStrap from "react-bootstrap";
 import './App.css'
-import { render } from '@testing-library/react';
-import {CheapestFlights} from './app/components/CheapestFlights'
+import HomeIcon from './app/components/HomeIcon';
+import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
 
 function App() {
+  
   const [nbRows,setNbRows] = useState(0);
   const [routes,setRoutes] = useState(new Map<String,Number>());
   const [cheapestroutes,setCheapestRoutes] = useState(new Map<String,Number>());
@@ -18,7 +20,12 @@ const dispatch= useAppDispatch();
 var {data = new Map<String,Number>(), isFetching} = useFetchRoutesQuery();
 //const {data = new Map<String,Number>(), isFetching} = useFetchCheapestRoutesQuery();
 
-
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
  const routesData = new Promise((resolve, reject) => {
 
   setTimeout(function() {
@@ -84,10 +91,16 @@ routes.forEach((key,value) =>
 
 
   return (
+  
     <div className="App">
+<div align='left'>
+<HomeIcon  />
+</div>
+       
       <header className="App-header">
-    
+      
         <p>Airlines  tracker</p>
+        
         <p>  count is: {count}</p>
         <p>
           <button type="button" onClick={handleIncrementClick} >
@@ -109,6 +122,7 @@ routes.forEach((key,value) =>
           <button type="button" onClick={fetchData} >
          routesApi
           </button>
+          
         </p>
   
         <p>
@@ -143,10 +157,12 @@ routes.forEach((key,value) =>
         
       </tbody>
         </ReactBootStrap.Table>
-        <CheapestFlights />
+      
       </div>
       </header>
+     
     </div>
+
   )
 }
 

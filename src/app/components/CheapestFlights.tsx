@@ -5,7 +5,7 @@ import {useFetchRoutesQuery} from '../../features/popularRoutes/popularRoutes';
 import {useFetchCheapestRoutesQuery} from '../../features/popularRoutes/popularRoutes';
 import * as ReactBootStrap from "react-bootstrap";
 
-import { render } from '@testing-library/react';
+
 
 export function CheapestFlights() {
 
@@ -58,6 +58,7 @@ console.log(cheapestroutes[1])
 
 
   return (
+    
     <div className="App">
       <header className="App-header">
     
@@ -92,16 +93,16 @@ console.log(cheapestroutes[1])
       </thead>
       <tbody>
       {
+    <>
+    <td>{cheapestroutes[0].airline}</td>
+    <td>{cheapestroutes[0].departure_at}</td>
+    <td>{cheapestroutes[0].return_at}</td>
+    <td>{cheapestroutes[0].price}</td>
+    <td>{cheapestroutes[0].expires_at}</td>
+    <td>{cheapestroutes[0].flight_number}</td>
   
-     <>
-     <td>{cheapestroutes[0].airline}</td>
-     <td>{cheapestroutes[0].departure_at}</td>
-     <td>{cheapestroutes[0].return_at}</td>
-     <td>{cheapestroutes[0].price}</td>
-     <td>{cheapestroutes[0].expires_at}</td>
-     <td>{cheapestroutes[0].flight_number}</td>
-     </>
-     
+    </>
+  
    }
         
       </tbody>

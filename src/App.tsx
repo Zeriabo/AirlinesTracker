@@ -13,7 +13,7 @@ import Button from '@mui/material/Button';
 import CheapestFlights from './app/components/CheapestFlights';
 import { setFalse, setOpposite, setTrue } from './features/showHideComponents/showHideRoutesDistanceSlice';
 import { useSelector } from 'react-redux';
-import {empty, fill} from './features/cheapestRoutes/cheapestSlice';
+
 function App() {
   const showHide= useAppSelector((state)=> state.showHideCheapest.showHide);
   const[showRoutesDistance,setShowRoutesDistance]= useState(false);
@@ -75,8 +75,7 @@ function fetchData()
   {
 
     for (const [key, value] of Object.entries(result.data)) {
-  
-      routesSet.set(key,value);
+        routesSet.set(key,value);
    //   routesSet.add(`${key}: ${value}`);
   
       
@@ -149,7 +148,7 @@ routes.forEach((key,value) =>
             reset
           </button> */}
           <Button variant="contained" onClick={fetchData} >
-         find routes distance from and to beirut
+         find routes distance for Finair
           </Button>
           <Button id="cheapestFlights" variant="contained" onClick={fetchCheapestBeirutFlights} >
          show cheapest flights to beirut

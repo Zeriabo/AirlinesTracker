@@ -9,6 +9,7 @@ export const store = configureStore({
         counter : counterReducer,
         showHideCheapest: showHideRoutesDistanceState,
         cheapestFlights:cheapestFlightsReducer,
+        
         [routesApi.reducerPath]:routesApi.reducer,
         [cheapestTickets.reducerPath]:cheapestTickets.reducer,
        

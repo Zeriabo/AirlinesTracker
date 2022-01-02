@@ -9,7 +9,7 @@ const initialState: FlightState ={
 };
 
 const counteSlice= createSlice({
-    name : 'counter',
+    name : 'flightNumbers',
     initialState,
     reducers:{
         //increment

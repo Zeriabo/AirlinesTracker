@@ -23,7 +23,7 @@ export const routesApi=  createApi({
         fetchRoutes: builder.query<routes[], number|void> ({
             query(limit=100){
 
-                return `/airline-directions?airline_code=ME`;
+                return `/airline-directions?airline_code=AY`;
             },
         }),
     }

@@ -4,13 +4,12 @@ import {incremented,decrement,reset,amountAdded} from '../../features/counter/co
 import {useFetchRoutesQuery} from '../../features/popularRoutes/popularRoutes';
 import {useFetchCheapestRoutesQuery} from '../../features/popularRoutes/popularRoutes';
 import * as ReactBootStrap from "react-bootstrap";
-
+import {empty, fill} from '../../features/cheapestRoutes/cheapestSlice';
+//import cheapestFlightsSlice from '../../features/cheapestRoutes/cheapestSlice';
 
 
 export function CheapestFlights() {
-
-
-  const [cheapestroutes,setCheapestRoutes] = useState([]);
+  const cheapestArray = useAppSelector((state)=> state.cheapestFlights.cheapest);
 
 const dispatch= useAppDispatch();
  
@@ -40,9 +39,9 @@ function fetchCheapestRoutes()
     function(result)
   {
     arr=result.data;
-console.log(arr)
 
-   setCheapestRoutes(arr);
+    dispatch(fill(arr))
+
 
   }); 
   
@@ -70,7 +69,7 @@ console.log(arr)
         <div className="routes">
     
     </div> 
-        
+    
       <div>
         <ReactBootStrap.Table  striped bordered hover>
       <thead>
@@ -87,17 +86,17 @@ console.log(arr)
       <tbody>
       {
     <>
-    {/* <td>{cheapestroutes[0].airline}</td>
-    <td>{cheapestroutes[0].departure_at}</td>
-    <td>{cheapestroutes[0].return_at}</td>
-    <td>{cheapestroutes[0].price}</td>
-    <td>{cheapestroutes[0].expires_at}</td>
-    <td>{cheapestroutes[0].flight_number}</td>
+    {/* <td>{cheapestArray.BER[0].airline}</td>
+    <td>{cheapestArray.BER[0].departure_at}</td>
+    <td>{cheapestArray.BER[0].return_at}</td>
+    <td>{cheapestArray.BER[0].price}</td>
+    <td>{cheapestArray.BER[0].expires_at}</td>
+    <td>{cheapestArray.BER[0].flight_number}</td>
    */}
     </>
   
    }
-        
+      
       </tbody>
         </ReactBootStrap.Table>
       </div>

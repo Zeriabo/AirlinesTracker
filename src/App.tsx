@@ -49,10 +49,14 @@ const routesSet = new Map<String,Number>();
 const cheapestRoutesSet = new Map<String,Number>();
 function fetchCheapestBeirutFlights()
 {
-  if(showRoutesDistance)
+
+  if(showRoutesDistance){
   setShowRoutesDistance(false);
-  else 
+  document.getElementById("cheapestFlights").innerHTML="show cheapest flights to berlin"
+  }else{
   setShowRoutesDistance(true)
+  document.getElementById("cheapestFlights").innerHTML="Hide cheapest flights to berlin"
+  }
  //console.log(showRoutesDistance)
 }
 function fetchData()
@@ -137,7 +141,7 @@ routes.forEach((key,value) =>
           <Button variant="contained" onClick={fetchData} >
          find routes distance from and to beirut
           </Button>
-          <Button variant="contained" onClick={fetchCheapestBeirutFlights} >
+          <Button id="cheapestFlights" variant="contained" onClick={fetchCheapestBeirutFlights} >
          show cheapest flights to beirut
           </Button>
         

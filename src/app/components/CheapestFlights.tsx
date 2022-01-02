@@ -25,7 +25,7 @@ const cheapestRoutesData = new Promise((resolve, reject) => {
   setTimeout(function() {
     resolve(data);
    
-    console.log(data.data.BER[0])
+   // console.log(data.data.BER[0])
   }, 2000);
 
 });
@@ -39,7 +39,7 @@ function fetchCheapestRoutes()
   cheapestRoutesData.then(
     function(result)
   {
-    arr=result.data.BER;
+    arr=result.data;
 console.log(arr)
 
    setCheapestRoutes(arr);
@@ -87,13 +87,13 @@ console.log(arr)
       <tbody>
       {
     <>
-    <td>{cheapestroutes[0].airline}</td>
+    {/* <td>{cheapestroutes[0].airline}</td>
     <td>{cheapestroutes[0].departure_at}</td>
     <td>{cheapestroutes[0].return_at}</td>
     <td>{cheapestroutes[0].price}</td>
     <td>{cheapestroutes[0].expires_at}</td>
     <td>{cheapestroutes[0].flight_number}</td>
-  
+   */}
     </>
   
    }

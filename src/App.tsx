@@ -11,13 +11,17 @@ import { styled } from '@mui/material/styles';
 import { Box, Grid } from '@mui/material';
 import Button from '@mui/material/Button';
 import CheapestFlights from './app/components/CheapestFlights';
+import { setFalse, setOpposite, setTrue } from './features/showHideComponents/showHideRoutesDistanceSlice';
+import { useSelector } from 'react-redux';
+import {empty, fill} from './features/cheapestRoutes/cheapestSlice';
 function App() {
-  
+  const showHide= useAppSelector((state)=> state.showHideCheapest.showHide);
   const[showRoutesDistance,setShowRoutesDistance]= useState(false);
   const [nbRows,setNbRows] = useState(0);
   const [routes,setRoutes] = useState(new Map<String,Number>());
   const [cheapestroutes,setCheapestRoutes] = useState(new Map<String,Number>());
 const count = useAppSelector((state)=> state.counter.value);
+const showHideDistanceRoutes= useAppSelector((state)=>state.showHideCheapest.showHide);
 const dispatch= useAppDispatch();
  
 var {data = new Map<String,Number>(), isFetching} = useFetchRoutesQuery();
@@ -46,15 +50,21 @@ const Item = styled(Paper)(({ theme }) => ({
 // });
 const routesSet = new Map<String,Number>();
 
-const cheapestRoutesSet = new Map<String,Number>();
+const cheapestRoutesSet = new Map<String,Number>(); 
 function fetchCheapestBeirutFlights()
-{
+{ 
+  dispatch(setOpposite());
 
-  if(showRoutesDistance){
-  setShowRoutesDistance(false);
+  if(showHideDistanceRoutes){
+    
+
+ 
+  
+  //need to check the documentation again
   document.getElementById("cheapestFlights").innerHTML="show cheapest flights to berlin"
   }else{
-  setShowRoutesDistance(true)
+
+
   document.getElementById("cheapestFlights").innerHTML="Hide cheapest flights to berlin"
   }
  //console.log(showRoutesDistance)
@@ -182,7 +192,7 @@ routes.forEach((key,value) =>
       </div>
       </header>
      <div>
-     { showRoutesDistance && (<CheapestFlights />) }
+     { showHideDistanceRoutes && (<CheapestFlights />) }
      </div>
      
 </Grid>

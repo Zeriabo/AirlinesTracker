@@ -93,16 +93,7 @@ console.log(cheapestroutes[1])
       </thead>
       <tbody>
       {
-    <>
-    <td>{cheapestroutes[0].airline}</td>
-    <td>{cheapestroutes[0].departure_at}</td>
-    <td>{cheapestroutes[0].return_at}</td>
-    <td>{cheapestroutes[0].price}</td>
-    <td>{cheapestroutes[0].expires_at}</td>
-    <td>{cheapestroutes[0].flight_number}</td>
-  
-    </>
-  
+   
    }
         
       </tbody>

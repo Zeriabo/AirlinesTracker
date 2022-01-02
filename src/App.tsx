@@ -8,9 +8,12 @@ import './App.css'
 import HomeIcon from './app/components/HomeIcon';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
-
+import { Box, Grid } from '@mui/material';
+import Button from '@mui/material/Button';
+import CheapestFlights from './app/components/CheapestFlights';
 function App() {
   
+  const[showRoutesDistance,setShowRoutesDistance]= useState(false);
   const [nbRows,setNbRows] = useState(0);
   const [routes,setRoutes] = useState(new Map<String,Number>());
   const [cheapestroutes,setCheapestRoutes] = useState(new Map<String,Number>());
@@ -44,7 +47,14 @@ const Item = styled(Paper)(({ theme }) => ({
 const routesSet = new Map<String,Number>();
 
 const cheapestRoutesSet = new Map<String,Number>();
-
+function fetchCheapestBeirutFlights()
+{
+  if(showRoutesDistance)
+  setShowRoutesDistance(false);
+  else 
+  setShowRoutesDistance(true)
+ //console.log(showRoutesDistance)
+}
 function fetchData()
 {
   routesData.then( function(result)
@@ -64,19 +74,19 @@ function fetchData()
 }
 
 
-function handleIncrementClick(){
+// function handleIncrementClick(){
 
- dispatch(incremented());
-}
-function handleDecrementClick(){
-  dispatch(decrement());
-}
-function handleResetClick(){
-  dispatch(reset());
-}
-function handleAmountAdded(){
-  dispatch(amountAdded(5));
-}
+//  dispatch(incremented());
+// }
+// function handleDecrementClick(){
+//   dispatch(decrement());
+// }
+// function handleResetClick(){
+//   dispatch(reset());
+// }
+// function handleAmountAdded(){
+//   dispatch(amountAdded(5));
+// }
 
 var arr=[]
 
@@ -91,17 +101,22 @@ routes.forEach((key,value) =>
 
 
   return (
-  
-    <div className="App">
-<div align='left'>
-<HomeIcon  />
+    <Grid   container 
+    direction="column"
+    justifyContent="center"
+    alignItems="center">
+    <div className="App" >
+    <Box gridColumn="span 8">
+    <Item><HomeIcon  /></Item>
+  </Box>
+
 </div>
        
       <header className="App-header">
       
         <p>Airlines  tracker</p>
         
-        <p>  count is: {count}</p>
+        {/* <p>  count is: {count}</p>
         <p>
           <button type="button" onClick={handleIncrementClick} >
           increment
@@ -118,12 +133,14 @@ routes.forEach((key,value) =>
           <br />
           <button type="button" onClick={handleResetClick} >
             reset
-          </button>
-          <button type="button" onClick={fetchData} >
-         routesApi
-          </button>
-          
-        </p>
+          </button> */}
+          <Button variant="contained" onClick={fetchData} >
+         find routes distance from and to beirut
+          </Button>
+          <Button variant="contained" onClick={fetchCheapestBeirutFlights} >
+         show cheapest flights to beirut
+          </Button>
+        
   
         <p>
         Airlines Routes number : {nbRows} 
@@ -137,7 +154,7 @@ routes.forEach((key,value) =>
       <thead>
         <tr>
       <th>Route</th>
-      <th>Distence</th>
+      <th>Distance</th>
       
         </tr>
       </thead>
@@ -160,9 +177,11 @@ routes.forEach((key,value) =>
       
       </div>
       </header>
+     <div>
+     { showRoutesDistance && (<CheapestFlights />) }
+     </div>
      
-    </div>
-
+</Grid>
   )
 }
 

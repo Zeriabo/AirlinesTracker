@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {useAppDispatch,useAppSelector} from '../../app/hooks';
 import {incremented,decrement,reset,amountAdded} from '../../features/counter/counterSlice'
 import {useFetchRoutesQuery} from '../../features/popularRoutes/popularRoutes';
@@ -21,7 +21,7 @@ const {data = new Array(), isFetching} = useFetchCheapestRoutesQuery();
 
 var entry = {};
 const cheapestFlights = useAppSelector((state)=> state.cheapestFlights.cheapest);
-
+const showHideDistanceRoutes= useAppSelector((state)=>state.showHideCheapest.showHide);
 const cheapestRoutesData = new Promise((resolve, reject) => {
 
   setTimeout(function() {
@@ -32,39 +32,49 @@ const cheapestRoutesData = new Promise((resolve, reject) => {
 
 });
 
+var arr=[];
 
-const rowData = [
-  {airline: "U2",
-  departure_at: Date("2022-02-04T20:55:00+02:00"),
-  expires_at: "2022-01-04T16:21:52Z",
-  flight_number: 5734,
-  price: 53,
-  return_at: "2022-02-06T08:00:00+01:00"},
-  {airline: "Ford", model: "Mondeo", price: 32000},
-  {airline: "Porsche", model: "Boxter", price: 72000}
-];
-var arr=[]
+useEffect(() => {
+
+  fetchCheapestRoutes();
+});
 function fetchCheapestRoutes()
 {
   
-  cheapestRoutesData.then(
-    function(result)
-  {
-    var arr=[];
-    var obj = result.data.BER;
-    console.log(obj)
-   // const arrayOFCheapest = Object.entries(obj).map((e) => ( arr.push(e) ));
-   'use strict';
+    cheapestRoutesData.then(
+      function(result)
+    {
 
-       Object.values(obj).map((e) => (
-        arr.push(e) ));
-console.log(arr)
-    dispatch(fill(arr))
-
-
-  }); 
+     var anotherArr = [];
+    if(typeof(result.data)!='undefined'){
+      var obj = result.data.BER;
   
-}
+     
+    
+         Object.values(obj).map((e) => ( (e!=null)?
+          arr.push(e):arr.push(e) ));
+console.log(arr)
+for(var i =0; i < arr.length; i++){
+  var obju= JSON.parse(JSON.stringify(arr[i]));
+  obju.departure_at=new Date(obju.departure_at);
+  obju.expires_at= new Date(obju.expires_at);
+  obju.return_at= new Date(obju.return_at)
+
+  anotherArr.push(obju)
+ }
+ 
+ console.log(anotherArr)
+      dispatch(fill(anotherArr))
+    }
+  
+    }); 
+
+ 
+  
+  }
+  
+  
+
 
 
 
@@ -73,18 +83,7 @@ console.log(arr)
     <div className="App">
       <header className="App-header">
     
-      
-       
-        <p>
-  
-          <button type="button" onClick={fetchCheapestRoutes} >
-         Get the cheapest flights
-          </button>
-        </p>
-  
-        <p>
-      
-        </p>
+
         <div className="routes">
     
     </div> 
@@ -93,10 +92,10 @@ console.log(arr)
            <AgGridReact
                rowData={cheapestFlights}>
                <AgGridColumn field="airline"></AgGridColumn>
-               <AgGridColumn field="departure_at"></AgGridColumn>
-               <AgGridColumn field="return_at"></AgGridColumn>
+               <AgGridColumn field="departure_at" resizable={true}></AgGridColumn>
+               <AgGridColumn field="return_at" resizable={true}></AgGridColumn>
                <AgGridColumn field="price"></AgGridColumn>
-               <AgGridColumn field="expires_at"></AgGridColumn>
+               <AgGridColumn field="expires_at" resizable={true}></AgGridColumn>
                <AgGridColumn field="flight_number"></AgGridColumn>
            </AgGridReact>
        </div>

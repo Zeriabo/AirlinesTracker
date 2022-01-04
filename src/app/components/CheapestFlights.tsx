@@ -5,6 +5,9 @@ import {useFetchRoutesQuery} from '../../features/popularRoutes/popularRoutes';
 import {useFetchCheapestRoutesQuery} from '../../features/popularRoutes/popularRoutes';
 import * as ReactBootStrap from "react-bootstrap";
 import {empty, fill} from '../../features/cheapestRoutes/cheapestSlice';
+import {AgGridColumn, AgGridReact} from 'ag-grid-react';
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 //import cheapestFlightsSlice from '../../features/cheapestRoutes/cheapestSlice';
 
 
@@ -17,7 +20,7 @@ const {data = new Array(), isFetching} = useFetchCheapestRoutesQuery();
 
 
 var entry = {};
-
+const cheapestFlights = useAppSelector((state)=> state.cheapestFlights.cheapest);
 
 const cheapestRoutesData = new Promise((resolve, reject) => {
 
@@ -30,7 +33,16 @@ const cheapestRoutesData = new Promise((resolve, reject) => {
 });
 
 
-
+const rowData = [
+  {airline: "U2",
+  departure_at: Date("2022-02-04T20:55:00+02:00"),
+  expires_at: "2022-01-04T16:21:52Z",
+  flight_number: 5734,
+  price: 53,
+  return_at: "2022-02-06T08:00:00+01:00"},
+  {airline: "Ford", model: "Mondeo", price: 32000},
+  {airline: "Porsche", model: "Boxter", price: 72000}
+];
 var arr=[]
 function fetchCheapestRoutes()
 {
@@ -38,8 +50,15 @@ function fetchCheapestRoutes()
   cheapestRoutesData.then(
     function(result)
   {
-    arr=result.data.BER;
-console.log
+    var arr=[];
+    var obj = result.data.BER;
+    console.log(obj)
+   // const arrayOFCheapest = Object.entries(obj).map((e) => ( arr.push(e) ));
+   'use strict';
+
+       Object.values(obj).map((e) => (
+        arr.push(e) ));
+console.log(arr)
     dispatch(fill(arr))
 
 
@@ -54,12 +73,12 @@ console.log
     <div className="App">
       <header className="App-header">
     
-        <p>Airlines  tracker</p>
+      
        
         <p>
   
           <button type="button" onClick={fetchCheapestRoutes} >
-         cheapestroutesApi
+         Get the cheapest flights
           </button>
         </p>
   
@@ -69,37 +88,20 @@ console.log
         <div className="routes">
     
     </div> 
-    
-      <div>
-        <ReactBootStrap.Table  striped bordered hover>
-      <thead>
-        <tr>
-      <th>airline</th>
-      <th>DepartureAt </th>
-      <th>ReturnAt</th>
-      <th>price</th>
-      <th>expiresAt</th>
-      <th>flightnumber</th>
+    <div>
+    <div className="ag-theme-alpine" style={{height: 400, width: 1200}}>
+           <AgGridReact
+               rowData={cheapestFlights}>
+               <AgGridColumn field="airline"></AgGridColumn>
+               <AgGridColumn field="departure_at"></AgGridColumn>
+               <AgGridColumn field="return_at"></AgGridColumn>
+               <AgGridColumn field="price"></AgGridColumn>
+               <AgGridColumn field="expires_at"></AgGridColumn>
+               <AgGridColumn field="flight_number"></AgGridColumn>
+           </AgGridReact>
+       </div>
+    </div>
       
-        </tr>
-      </thead>
-      <tbody>
-      {
-    <>
-    {/* <td>{cheapestArray.BER[0].airline}</td>
-    <td>{cheapestArray.BER[0].departure_at}</td>
-    <td>{cheapestArray.BER[0].return_at}</td>
-    <td>{cheapestArray.BER[0].price}</td>
-    <td>{cheapestArray.BER[0].expires_at}</td>
-    <td>{cheapestArray.BER[0].flight_number}</td>
-   */}
-    </>
-  
-   }
-      
-      </tbody>
-        </ReactBootStrap.Table>
-      </div>
       </header>
     </div>
   )

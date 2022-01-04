@@ -88,7 +88,7 @@ for(var i =0; i < arr.length; i++){
     
     </div> 
     <div>
-    <div className="ag-theme-alpine" style={{height: 400, width: 1200}}>
+    <div className="ag-theme-alpine" style={{height:400, width: 1200}}>
            <AgGridReact
                rowData={cheapestFlights}>
                <AgGridColumn field="airline"></AgGridColumn>

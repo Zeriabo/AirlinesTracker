@@ -115,42 +115,62 @@ routes.forEach((key,value) =>
 
 
   return (
+    
     <Grid   container 
     direction="column"
     justifyContent="center"
     alignItems="center">
     <div className="App" >
-    <Box gridColumn="span 8">
-    <Item><HomeIcon  /></Item>
-  </Box>
+      
+    <nav className="navbar" role="navigation" aria-label="dropdown navigation">
+  <a className="navbar-item">
+    <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: Free, open source, and modern CSS framework based on Flexbox" width="112" height="28" />
+  </a>
 
+  <div className="navbar-item has-dropdown  ">
+    <a className="navbar-link">
+      Docs
+    </a>
+
+    <div className="navbar-dropdown">
+      <a className="navbar-item">
+        Overview
+      </a>
+      <a className="navbar-item ">
+        Elements
+      </a>
+      <a className="navbar-item">
+        Components
+      </a>
+      <hr className="navbar-divider" />
+      <div className="navbar-item">
+        Version 0.9.3
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section className="hero is-primary">
+  <div className="hero-body">
+    <p className="title">
+      Airline Tracker
+    </p>
+    <p className="subtitle">
+      Everything you need to <strong>know about airline flights</strong> with Airline tracker
+    </p>
+  </div>
+</section>
+<p> <Button variant="contained" onClick={fetchData} >
+         find routes distance for Finair
+          </Button></p>
 </div>
        
       <header className="App-header">
       
-        <p>Airlines  tracker</p>
+   
         
-        {/* <p>  count is: {count}</p>
-        <p>
-          <button type="button" onClick={handleIncrementClick} >
-          increment
-          </button>
-          <br /> 
-          <button type="button" onClick={handleDecrementClick} >
-            decrement
-          </button>
+    
          
-          <br /> 
-          <button type="button" onClick={ handleAmountAdded} >
-            added by 5
-          </button>
-          <br />
-          <button type="button" onClick={handleResetClick} >
-            reset
-          </button> */}
-          <Button variant="contained" onClick={fetchData} >
-         find routes distance for Finair
-          </Button>
           <Button id="cheapestFlights" variant="contained" onClick={fetchCheapestBeirutFlights} >
          show cheapest flights to Berlin
           </Button>

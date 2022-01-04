@@ -24,7 +24,7 @@ const cheapestRoutesData = new Promise((resolve, reject) => {
   setTimeout(function() {
     resolve(data);
    
-   // console.log(data.data.BER[0])
+  // console.log(data.data.BER)
   }, 2000);
 
 });
@@ -38,8 +38,8 @@ function fetchCheapestRoutes()
   cheapestRoutesData.then(
     function(result)
   {
-    arr=result.data;
-
+    arr=result.data.BER;
+console.log
     dispatch(fill(arr))
 
 
